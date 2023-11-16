@@ -570,6 +570,12 @@ static void scan_item(unsigned depth, vpiHandle item, int skip)
 
       switch (vpi_get(vpiType, item)) {
 
+	  case vpiMemory:
+	  case vpiNetArray:
+	    //vpi_printf("array: %s\n", vpi_get_str(vpiFullName, item));
+	    break;
+
+
 	  case vpiMemoryWord:
 	    if (vpi_get(vpiConstantSelect, item) == 0) {
 		    /* Turn a non-constant array word select into a
@@ -689,6 +695,7 @@ static void scan_item(unsigned depth, vpiHandle item, int skip)
 			/* vpiParameter, */
 			vpiReg,
 			vpiVariables,
+			vpiMemory,
 			/* Scope */
 			vpiFunction,
 			vpiGenScope,

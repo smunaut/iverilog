@@ -1206,9 +1206,10 @@ void elaborate_unpacked_port(Design *des, NetScope *scope, NetNet *port_net,
       }
 
       ivl_assert(*port_net, expr_net->pin_count() == port_net->pin_count());
-      if (port_type == NetNet::POUTPUT)
+      if (port_type == NetNet::POUTPUT) {
+	    expr_net->type(NetNet::WIRE);
 	    assign_unpacked_with_bufz(des, scope, port_net, expr_net, port_net);
-      else
+      } else
 	    assign_unpacked_with_bufz(des, scope, port_net, port_net, expr_net);
 }
 
